@@ -1,4 +1,3 @@
-# --pki-dir
 require 'spec_helper'
 
 describe RubyEasyRSA::Commands::InitialisePKI do
@@ -30,5 +29,19 @@ describe RubyEasyRSA::Commands::InitialisePKI do
             .with('path/to/binary init-pki', any_args))
 
     command.execute
+  end
+
+  it 'uses the provided PKI directory when specified' do
+    pki_directory = "./some/pki/directory"
+
+    command = RubyEasyRSA::Commands::InitialisePKI.new
+
+    expect(Open4).to(
+        receive(:spawn)
+            .with('path/to/binary init-pki --pki-dir=./some/pki/directory',
+                any_args))
+
+    command.execute(
+        pki_directory: pki_directory)
   end
 end
