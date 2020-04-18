@@ -8,7 +8,6 @@ module RubyEasyRSA
         openssl_binary = opts[:openssl_binary]
         ssl_configuration = opts[:ssl_configuration]
         safe_configuration = opts[:safe_configuration]
-        extensions_directory = opts[:extensions_directory]
         vars = opts[:vars]
         pki_directory = opts[:pki_directory]
 

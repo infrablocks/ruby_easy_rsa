@@ -268,4 +268,63 @@ describe RubyEasyRSA::Commands::BuildCA do
     command.execute(
         sub_ca: sub_ca)
   end
+
+  it 'uses the provided openssl binary when specified' do
+    openssl_binary = "./vendor/openssl/bin/openssl"
+
+    command = RubyEasyRSA::Commands::BuildCA.new
+
+    expect(Open4).to(
+        receive(:spawn)
+            .with('EASYRSA_OPENSSL="./vendor/openssl/bin/openssl" ' +
+                'path/to/binary build-ca',
+                any_args))
+
+    command.execute(
+        openssl_binary: openssl_binary)
+  end
+
+  it 'uses the provided ssl configuration when specified' do
+    ssl_configuration = "./vendor/easyrsa/openssl-easyrsa.cnf"
+
+    command = RubyEasyRSA::Commands::BuildCA.new
+
+    expect(Open4).to(
+        receive(:spawn)
+            .with('EASYRSA_SSL_CONF="./vendor/easyrsa/openssl-easyrsa.cnf" ' +
+                'path/to/binary build-ca',
+                any_args))
+
+    command.execute(
+        ssl_configuration: ssl_configuration)
+  end
+
+  it 'uses the provided safe configuration when specified' do
+    safe_configuration = "./vendor/easyrsa/safessl-easyrsa.cnf"
+
+    command = RubyEasyRSA::Commands::BuildCA.new
+
+    expect(Open4).to(
+        receive(:spawn)
+            .with('EASYRSA_SAFE_CONF="./vendor/easyrsa/safessl-easyrsa.cnf" ' +
+                'path/to/binary build-ca',
+                any_args))
+
+    command.execute(
+        safe_configuration: safe_configuration)
+  end
+
+  it 'uses the provided vars when specified' do
+    vars = "./pki/vars"
+
+    command = RubyEasyRSA::Commands::BuildCA.new
+
+    expect(Open4).to(
+        receive(:spawn)
+            .with('path/to/binary --vars=./pki/vars build-ca',
+                any_args))
+
+    command.execute(
+        vars: vars)
+  end
 end
