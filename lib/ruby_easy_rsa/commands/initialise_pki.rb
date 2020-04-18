@@ -7,11 +7,8 @@ module RubyEasyRSA
       def configure_command(builder, opts)
         pki_directory = opts[:pki_directory]
 
-        builder
-            .with_subcommand('init-pki') do |sub|
-          sub = sub.with_option('--pki-dir', pki_directory) if pki_directory
-          sub
-        end
+        builder = builder.with_option('--pki-dir', pki_directory) if pki_directory
+        builder.with_subcommand('init-pki')
       end
     end
   end

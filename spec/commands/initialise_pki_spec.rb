@@ -38,7 +38,7 @@ describe RubyEasyRSA::Commands::InitialisePKI do
 
     expect(Open4).to(
         receive(:spawn)
-            .with('path/to/binary init-pki --pki-dir=./some/pki/directory',
+            .with('path/to/binary --pki-dir=./some/pki/directory init-pki',
                 any_args))
 
     command.execute(
