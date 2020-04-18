@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe RubyEasyRSA::Commands::InitialisePKI do
+describe RubyEasyRSA::Commands::InitPKI do
   before(:each) do
     RubyEasyRSA.configure do |config|
       config.binary = 'path/to/binary'
@@ -12,7 +12,7 @@ describe RubyEasyRSA::Commands::InitialisePKI do
   end
 
   it 'calls the easyrsa init-pki command' do
-    command = RubyEasyRSA::Commands::InitialisePKI.new(binary: 'easyrsa')
+    command = RubyEasyRSA::Commands::InitPKI.new(binary: 'easyrsa')
 
     expect(Open4).to(
         receive(:spawn)
@@ -22,7 +22,7 @@ describe RubyEasyRSA::Commands::InitialisePKI do
   end
 
   it 'defaults to the configured binary when none provided' do
-    command = RubyEasyRSA::Commands::InitialisePKI.new
+    command = RubyEasyRSA::Commands::InitPKI.new
 
     expect(Open4).to(
         receive(:spawn)
@@ -34,7 +34,7 @@ describe RubyEasyRSA::Commands::InitialisePKI do
   it 'uses the provided PKI directory when specified' do
     pki_directory = "./some/pki/directory"
 
-    command = RubyEasyRSA::Commands::InitialisePKI.new
+    command = RubyEasyRSA::Commands::InitPKI.new
 
     expect(Open4).to(
         receive(:spawn)
@@ -48,7 +48,7 @@ describe RubyEasyRSA::Commands::InitialisePKI do
   it 'uses the provided openssl binary when specified' do
     openssl_binary = "./vendor/openssl/bin/openssl"
 
-    command = RubyEasyRSA::Commands::InitialisePKI.new
+    command = RubyEasyRSA::Commands::InitPKI.new
 
     expect(Open4).to(
         receive(:spawn)
@@ -63,7 +63,7 @@ describe RubyEasyRSA::Commands::InitialisePKI do
   it 'uses the provided ssl configuration when specified' do
     ssl_configuration = "./vendor/easyrsa/openssl-easyrsa.cnf"
 
-    command = RubyEasyRSA::Commands::InitialisePKI.new
+    command = RubyEasyRSA::Commands::InitPKI.new
 
     expect(Open4).to(
         receive(:spawn)
@@ -78,7 +78,7 @@ describe RubyEasyRSA::Commands::InitialisePKI do
   it 'uses the provided safe configuration when specified' do
     safe_configuration = "./vendor/easyrsa/safessl-easyrsa.cnf"
 
-    command = RubyEasyRSA::Commands::InitialisePKI.new
+    command = RubyEasyRSA::Commands::InitPKI.new
 
     expect(Open4).to(
         receive(:spawn)
@@ -93,7 +93,7 @@ describe RubyEasyRSA::Commands::InitialisePKI do
   it 'uses the provided vars when specified' do
     vars = "./pki/vars"
 
-    command = RubyEasyRSA::Commands::InitialisePKI.new
+    command = RubyEasyRSA::Commands::InitPKI.new
 
     expect(Open4).to(
         receive(:spawn)
