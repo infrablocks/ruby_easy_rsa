@@ -19,4 +19,21 @@ shared_examples(
     command.execute(
         options.merge(extra_extensions: extra_extensions))
   end
+
+  it 'includes the provided subject alternative name' do
+    subject_alternative_name = 'some.name.example.com'
+
+    command = subject.class.new
+
+    expect(Open4).to(
+        receive(:spawn)
+            .with("path/to/binary " +
+                "--subject-alt-name=\"some.name.example.com\" " +
+                "#{command_name}#{argument_string}",
+                any_args))
+
+    command.execute(
+        options.merge(
+            subject_alternative_name: subject_alternative_name))
+  end
 end
