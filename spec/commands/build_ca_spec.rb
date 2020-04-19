@@ -3,6 +3,7 @@ require 'spec_helper'
 require_relative '../support/shared_examples/global_config'
 require_relative '../support/shared_examples/algorithm_config'
 require_relative '../support/shared_examples/ssl_config'
+require_relative '../support/shared_examples/encrypt_key_config'
 
 describe RubyEasyRSA::Commands::BuildCA do
   before(:each) do
@@ -38,34 +39,7 @@ describe RubyEasyRSA::Commands::BuildCA do
   it_behaves_like "a command with global config", "build-ca"
   it_behaves_like "a command with algorithm config", "build-ca"
   it_behaves_like "a command with ssl config", "build-ca"
-
-  it 'passes the nopass argument when encrypt_key is false' do
-    encrypt_key = false
-
-    command = subject.class.new
-
-    expect(Open4).to(
-        receive(:spawn)
-            .with('path/to/binary build-ca nopass',
-                any_args))
-
-    command.execute(
-        encrypt_key: encrypt_key)
-  end
-
-  it 'does not pass the nopass argument when encrypt_key is true' do
-    encrypt_key = true
-
-    command = subject.class.new
-
-    expect(Open4).to(
-        receive(:spawn)
-            .with('path/to/binary build-ca',
-                any_args))
-
-    command.execute(
-        encrypt_key: encrypt_key)
-  end
+  it_behaves_like "a command with encrypt key config", "build-ca"
 
   it 'passes the subca argument when sub_ca is true' do
     sub_ca = true

@@ -7,6 +7,7 @@ require_relative '../support/shared_examples/sub_ca_config'
 require_relative '../support/shared_examples/copy_extensions_config'
 require_relative '../support/shared_examples/extra_extensions_config'
 require_relative '../support/shared_examples/netscape_extensions_config'
+require_relative '../support/shared_examples/encrypt_key_config'
 
 describe RubyEasyRSA::Commands::BuildServerFull do
   before(:each) do
@@ -70,6 +71,10 @@ describe RubyEasyRSA::Commands::BuildServerFull do
       ["some_important_thing"],
       filename_base: "some_important_thing")
   it_behaves_like("a command with netscape extensions config",
+      "build-server-full",
+      ["some_important_thing"],
+      filename_base: "some_important_thing")
+  it_behaves_like("a command with encrypt key config",
       "build-server-full",
       ["some_important_thing"],
       filename_base: "some_important_thing")

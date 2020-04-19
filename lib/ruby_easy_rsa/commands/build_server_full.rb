@@ -8,6 +8,7 @@ require_relative 'mixins/sub_ca_config'
 require_relative 'mixins/copy_extensions_config'
 require_relative 'mixins/extra_extensions_config'
 require_relative 'mixins/netscape_extensions_config'
+require_relative 'mixins/encrypt_key_config'
 
 module RubyEasyRSA
   module Commands
@@ -19,13 +20,14 @@ module RubyEasyRSA
       include Mixins::CopyExtensionsConfig
       include Mixins::ExtraExtensionsConfig
       include Mixins::NetscapeExtensionsConfig
+      include Mixins::EncryptKeyConfig
 
       def configure_command(builder, opts)
         filename_base = opts[:filename_base]
 
-        builder = super(builder, opts)
         builder = builder.with_subcommand('build-server-full')
         builder = builder.with_argument(filename_base)
+        builder = super(builder, opts)
         builder
       end
     end

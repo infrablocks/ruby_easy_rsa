@@ -4,6 +4,7 @@ require_relative 'base'
 require_relative 'mixins/global_config'
 require_relative 'mixins/ssl_config'
 require_relative 'mixins/algorithm_config'
+require_relative 'mixins/encrypt_key_config'
 
 module RubyEasyRSA
   module Commands
@@ -11,15 +12,14 @@ module RubyEasyRSA
       include Mixins::GlobalConfig
       include Mixins::SSLConfig
       include Mixins::AlgorithmConfig
+      include Mixins::EncryptKeyConfig
 
       def configure_command(builder, opts)
-        encrypt_key = opts[:encrypt_key].nil? ? true : opts[:encrypt_key]
         sub_ca = opts[:sub_ca]
 
-        builder = super(builder, opts)
         builder = builder.with_subcommand('build-ca')
-        builder = builder.with_argument('nopass') unless encrypt_key
         builder = builder.with_argument('subca') if sub_ca
+        builder = super(builder, opts)
         builder
       end
     end
