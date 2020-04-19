@@ -10,6 +10,7 @@ require_relative 'commands/gen_crl'
 require_relative 'commands/update_db'
 require_relative 'commands/show_req'
 require_relative 'commands/show_cert'
+require_relative 'commands/import_req'
 
 module RubyEasyRSA
   module Commands

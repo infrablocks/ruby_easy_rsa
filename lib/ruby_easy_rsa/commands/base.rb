@@ -25,7 +25,8 @@ module RubyEasyRSA
         builder = instantiate_builder
 
         do_before(opts)
-        configure_command(builder, opts)
+        builder = configure_command(builder, opts)
+        builder
             .build
             .execute(
                 stdin: stdin,
