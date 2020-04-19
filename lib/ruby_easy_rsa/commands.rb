@@ -13,6 +13,8 @@ require_relative 'commands/show_cert'
 require_relative 'commands/import_req'
 require_relative 'commands/export_p7'
 require_relative 'commands/export_p12'
+require_relative 'commands/set_rsa_pass'
+require_relative 'commands/set_ec_pass'
 
 module RubyEasyRSA
   module Commands
