@@ -3,6 +3,8 @@ require 'spec_helper'
 require_relative '../support/shared_examples/global_config'
 require_relative '../support/shared_examples/algorithm_config'
 require_relative '../support/shared_examples/ssl_config'
+require_relative '../support/shared_examples/sub_ca_config'
+require_relative '../support/shared_examples/copy_extensions_config'
 require_relative '../support/shared_examples/extra_extensions_config'
 require_relative '../support/shared_examples/netscape_extensions_config'
 
@@ -62,6 +64,16 @@ describe RubyEasyRSA::Commands::SignReq do
       ["ca", "some_important_thing"],
       filename_base: "some_important_thing",
       type: "ca")
+  it_behaves_like("a command with sub-CA config",
+      "sign-req",
+      ["ca", "some_important_thing"],
+      filename_base: "some_important_thing",
+      type: "ca")
+  it_behaves_like("a command with copy extensions config",
+      "sign-req",
+      ["ca", "some_important_thing"],
+      filename_base: "some_important_thing",
+      type: "ca")
   it_behaves_like("a command with extra extensions config",
       "sign-req",
       ["ca", "some_important_thing"],
@@ -72,54 +84,4 @@ describe RubyEasyRSA::Commands::SignReq do
       ["ca", "some_important_thing"],
       filename_base: "some_important_thing",
       type: "ca")
-
-  it 'includes the copy-ext switch when copy extensions is true' do
-    type = "server"
-    filename_base = 'some_important_thing'
-    command = subject.class.new
-
-    expect(Open4).to(
-        receive(:spawn)
-            .with('path/to/binary --copy-ext sign-req server some_important_thing',
-                any_args))
-
-    command.execute(
-        filename_base: filename_base,
-        type: type,
-        copy_extensions: true)
-  end
-
-  it 'does not include the copy-ext switch when copy extensions is false' do
-    type = "server"
-    filename_base = 'some_important_thing'
-    command = subject.class.new
-
-    expect(Open4).to(
-        receive(:spawn)
-            .with('path/to/binary sign-req server some_important_thing',
-                any_args))
-
-    command.execute(
-        filename_base: filename_base,
-        type: type,
-        copy_extensions: false)
-  end
-
-  it 'uses the provided sub-CA length' do
-    type = "server"
-    filename_base = 'some_important_thing'
-    sub_ca_length = 10
-    command = subject.class.new
-
-    expect(Open4).to(
-        receive(:spawn)
-            .with('path/to/binary --subca-len=10 ' +
-                'sign-req server some_important_thing',
-                any_args))
-
-    command.execute(
-        filename_base: filename_base,
-        type: type,
-        sub_ca_length: sub_ca_length)
-  end
 end

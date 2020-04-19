@@ -3,6 +3,8 @@ require 'spec_helper'
 require_relative '../support/shared_examples/global_config'
 require_relative '../support/shared_examples/algorithm_config'
 require_relative '../support/shared_examples/ssl_config'
+require_relative '../support/shared_examples/sub_ca_config'
+require_relative '../support/shared_examples/copy_extensions_config'
 require_relative '../support/shared_examples/extra_extensions_config'
 require_relative '../support/shared_examples/netscape_extensions_config'
 
@@ -55,6 +57,14 @@ describe RubyEasyRSA::Commands::BuildClientFull do
       "build-client-full",
       ["some_important_thing"],
       filename_base: "some_important_thing")
+  it_behaves_like("a command with sub-CA config",
+      "build-client-full",
+      ["some_important_thing"],
+      filename_base: "some_important_thing")
+  it_behaves_like("a command with copy extensions config",
+      "build-client-full",
+      ["some_important_thing"],
+      filename_base: "some_important_thing")
   it_behaves_like("a command with extra extensions config",
       "build-client-full",
       ["some_important_thing"],
@@ -63,36 +73,6 @@ describe RubyEasyRSA::Commands::BuildClientFull do
       "build-client-full",
       ["some_important_thing"],
       filename_base: "some_important_thing")
-
-  it 'includes the copy-ext switch when copy extensions is true' do
-    filename_base = 'some_important_thing'
-    command = subject.class.new
-
-    expect(Open4).to(
-        receive(:spawn)
-            .with(
-                'path/to/binary --copy-ext build-client-full ' +
-                    'some_important_thing',
-                any_args))
-
-    command.execute(
-        filename_base: filename_base,
-        copy_extensions: true)
-  end
-
-  it 'does not include the copy-ext switch when copy extensions is false' do
-    filename_base = 'some_important_thing'
-    command = subject.class.new
-
-    expect(Open4).to(
-        receive(:spawn)
-            .with('path/to/binary build-client-full some_important_thing',
-                any_args))
-
-    command.execute(
-        filename_base: filename_base,
-        copy_extensions: false)
-  end
 
   it 'uses the provided sub-CA length' do
     filename_base = 'some_important_thing'
