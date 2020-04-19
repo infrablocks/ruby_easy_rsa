@@ -3,6 +3,36 @@ shared_examples "a command with global config" do |command_name, arguments = [],
     arguments.empty? ? "" : " #{arguments.join(" ")}"
   end
 
+  it 'uses the provided PKI directory when specified' do
+    pki_directory = "./some/pki/directory"
+
+    command = subject.class.new
+
+    expect(Open4).to(
+        receive(:spawn)
+            .with("path/to/binary --pki-dir=./some/pki/directory " +
+                "#{command_name}#{argument_string}",
+                any_args))
+
+    command.execute(
+        options.merge(pki_directory: pki_directory))
+  end
+
+  it 'uses the provided extensions directory when specified' do
+    extensions_directory = "./pki/extensions"
+
+    command = subject.class.new
+
+    expect(Open4).to(
+        receive(:spawn)
+            .with("EASYRSA_EXT_DIR=\"./pki/extensions\" path/to/binary " +
+                "#{command_name}#{argument_string}",
+                any_args))
+
+    command.execute(
+        options.merge(extensions_directory: extensions_directory))
+  end
+
   it 'uses the provided openssl binary when specified' do
     openssl_binary = "./vendor/openssl/bin/openssl"
 

@@ -3,21 +3,6 @@ shared_examples "a command with ssl config" do |command_name, arguments = [], op
     arguments.empty? ? "" : " #{arguments.join(" ")}"
   end
 
-  it 'uses the provided PKI directory when specified' do
-    pki_directory = "./some/pki/directory"
-
-    command = subject.class.new
-
-    expect(Open4).to(
-        receive(:spawn)
-            .with("path/to/binary --pki-dir=./some/pki/directory " +
-                "#{command_name}#{argument_string}",
-                any_args))
-
-    command.execute(
-        options.merge(pki_directory: pki_directory))
-  end
-
   it 'uses the provided CA expiration time when specified' do
     expires_in_days = "90"
 

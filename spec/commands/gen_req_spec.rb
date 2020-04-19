@@ -3,6 +3,7 @@ require 'spec_helper'
 require_relative '../support/shared_examples/global_config'
 require_relative '../support/shared_examples/algorithm_config'
 require_relative '../support/shared_examples/ssl_config'
+require_relative '../support/shared_examples/extra_extensions_config'
 
 describe RubyEasyRSA::Commands::GenReq do
   before(:each) do
@@ -48,6 +49,10 @@ describe RubyEasyRSA::Commands::GenReq do
       ["some_important_thing"],
       filename_base: "some_important_thing")
   it_behaves_like("a command with ssl config",
+      "gen-req",
+      ["some_important_thing"],
+      filename_base: "some_important_thing")
+  it_behaves_like("a command with extra extensions config",
       "gen-req",
       ["some_important_thing"],
       filename_base: "some_important_thing")

@@ -3,7 +3,6 @@ module RubyEasyRSA
     module Mixins
       module SSLConfig
         def configure_command(builder, opts)
-          pki_directory = opts[:pki_directory]
           digest = opts[:digest]
           key_size_in_bits = opts[:key_size_in_bits]
           expires_in_days = opts[:expires_in_days]
@@ -17,8 +16,6 @@ module RubyEasyRSA
           email = opts[:email]
 
           builder = super(builder, opts)
-          builder = builder.with_option(
-              '--pki-dir', pki_directory) if pki_directory
           builder = builder.with_option(
               '--digest', digest) if digest
           builder = builder.with_option(
