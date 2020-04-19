@@ -59,6 +59,38 @@ describe RubyEasyRSA::Commands::BuildCA do
         algorithm: algorithm)
   end
 
+  it 'uses the provided curve when specified' do
+    filename_base = 'some_important_thing'
+    curve = "sect571k1"
+
+    command = RubyEasyRSA::Commands::BuildCA.new
+
+    expect(Open4).to(
+        receive(:spawn)
+            .with('path/to/binary --curve=sect571k1 build-ca',
+                any_args))
+
+    command.execute(
+        curve: curve,
+        filename_base: filename_base)
+  end
+
+  it 'uses the provided ec directory when specified' do
+    filename_base = 'some_important_thing'
+    ec_directory = "./ec"
+
+    command = RubyEasyRSA::Commands::BuildCA.new
+
+    expect(Open4).to(
+        receive(:spawn)
+            .with('EASYRSA_EC_DIR="./ec" path/to/binary build-ca',
+                any_args))
+
+    command.execute(
+        ec_directory: ec_directory,
+        filename_base: filename_base)
+  end
+
   it 'uses the provided CA expiration time when specified' do
     expires_in_days = "90"
 
@@ -328,22 +360,3 @@ describe RubyEasyRSA::Commands::BuildCA do
         vars: vars)
   end
 end
-
-
-$EASYRSA_OPENSSL
-$EASYRSA_SSL_CONF
-$EASYRSA_SAFE_CONF
-
-$EASYRSA_PKI
-$EASYRSA_CERT_EXPIRE
-$EASYRSA_CRL_DAYS
-$EASYRSA_DIGEST
-$EASYRSA_KEY_SIZE
-$EASYRSA_DN
-$EASYRSA_REQ_COUNTRY
-$EASYRSA_REQ_PROVINCE
-$EASYRSA_REQ_CITY
-$EASYRSA_REQ_ORG
-$EASYRSA_REQ_OU
-$EASYRSA_REQ_CN
-$EASYRSA_REQ_EMAIL
