@@ -6,6 +6,7 @@ require_relative 'commands/sign_req'
 require_relative 'commands/build_client_full'
 require_relative 'commands/build_server_full'
 require_relative 'commands/revoke'
+require_relative 'commands/gen_crl'
 
 module RubyEasyRSA
   module Commands
