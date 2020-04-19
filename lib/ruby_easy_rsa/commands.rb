@@ -11,6 +11,8 @@ require_relative 'commands/update_db'
 require_relative 'commands/show_req'
 require_relative 'commands/show_cert'
 require_relative 'commands/import_req'
+require_relative 'commands/export_p7'
+require_relative 'commands/export_p12'
 
 module RubyEasyRSA
   module Commands
