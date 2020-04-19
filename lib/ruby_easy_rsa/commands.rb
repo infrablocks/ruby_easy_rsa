@@ -8,6 +8,8 @@ require_relative 'commands/build_server_full'
 require_relative 'commands/revoke'
 require_relative 'commands/gen_crl'
 require_relative 'commands/update_db'
+require_relative 'commands/show_req'
+require_relative 'commands/show_cert'
 
 module RubyEasyRSA
   module Commands
