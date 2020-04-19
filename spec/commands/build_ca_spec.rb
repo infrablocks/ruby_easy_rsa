@@ -39,20 +39,6 @@ describe RubyEasyRSA::Commands::BuildCA do
   it_behaves_like "a command with algorithm config", "build-ca"
   it_behaves_like "a command with ssl config", "build-ca"
 
-  it 'uses the provided batch flag when specified' do
-    batch = true
-
-    command = subject.class.new
-
-    expect(Open4).to(
-        receive(:spawn)
-            .with('path/to/binary --batch build-ca',
-                any_args))
-
-    command.execute(
-        batch: batch)
-  end
-
   it 'passes the nopass argument when encrypt_key is false' do
     encrypt_key = false
 

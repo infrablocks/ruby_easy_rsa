@@ -57,23 +57,6 @@ describe RubyEasyRSA::Commands::GenReq do
       ["some_important_thing"],
       filename_base: "some_important_thing")
 
-  it 'uses the provided batch flag when specified' do
-    filename_base = 'some_important_thing'
-    batch = true
-
-    command = RubyEasyRSA::Commands::GenReq.new
-
-    expect(Open4).to(
-        receive(:spawn)
-            .with('path/to/binary --batch gen-req some_important_thing',
-                any_args))
-
-    command.execute(
-        batch: batch,
-        filename_base: filename_base)
-
-  end
-
   it 'passes the nopass argument when encrypt_key is false' do
     filename_base = 'some_important_thing'
     encrypt_key = false

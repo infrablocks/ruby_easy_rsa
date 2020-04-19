@@ -92,4 +92,34 @@ shared_examples "a command with global config" do |command_name, arguments = [],
     command.execute(
         options.merge(vars: vars))
   end
+
+  it 'passes the batch flag when batch is true' do
+    batch = true
+
+    command = subject.class.new
+
+    expect(Open4).to(
+        receive(:spawn)
+            .with("path/to/binary --batch " +
+                "#{command_name}#{argument_string}",
+                any_args))
+
+    command.execute(
+        options.merge(batch: batch))
+  end
+
+  it 'does not pass the batch flag when batch is false' do
+    batch = false
+
+    command = subject.class.new
+
+    expect(Open4).to(
+        receive(:spawn)
+            .with("path/to/binary " +
+                "#{command_name}#{argument_string}",
+                any_args))
+
+    command.execute(
+        options.merge(batch: batch))
+  end
 end
