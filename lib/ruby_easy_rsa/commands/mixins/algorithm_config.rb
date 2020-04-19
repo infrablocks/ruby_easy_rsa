@@ -1,7 +1,7 @@
 module RubyEasyRSA
   module Commands
     module Mixins
-      module AlgoConfig
+      module AlgorithmConfig
         def configure_command(builder, opts)
           algorithm = opts[:algorithm]
           curve = opts[:curve]

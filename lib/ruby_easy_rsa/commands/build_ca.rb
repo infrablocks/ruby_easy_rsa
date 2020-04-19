@@ -3,14 +3,14 @@ require 'lino'
 require_relative 'base'
 require_relative 'mixins/global_config'
 require_relative 'mixins/ssl_config'
-require_relative 'mixins/algo_config'
+require_relative 'mixins/algorithm_config'
 
 module RubyEasyRSA
   module Commands
     class BuildCA < Base
       include Mixins::GlobalConfig
       include Mixins::SSLConfig
-      include Mixins::AlgoConfig
+      include Mixins::AlgorithmConfig
 
       def configure_command(builder, opts)
         batch = opts[:batch]
