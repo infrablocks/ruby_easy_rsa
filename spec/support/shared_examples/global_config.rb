@@ -122,4 +122,34 @@ shared_examples "a command with global config" do |command_name, arguments = [],
     command.execute(
         options.merge(batch: batch))
   end
+
+  it 'uses the provided password spec for passin' do
+    input_password = 'pass:1234'
+
+    command = subject.class.new
+
+    expect(Open4).to(
+        receive(:spawn)
+            .with("path/to/binary --passin=pass:1234 " +
+                "#{command_name}#{argument_string}",
+                any_args))
+
+    command.execute(
+        options.merge(input_password: input_password))
+  end
+
+  it 'uses the provided password spec for passout' do
+    output_password = 'pass:1234'
+
+    command = subject.class.new
+
+    expect(Open4).to(
+        receive(:spawn)
+            .with("path/to/binary --passout=pass:1234 " +
+                "#{command_name}#{argument_string}",
+                any_args))
+
+    command.execute(
+        options.merge(output_password: output_password))
+  end
 end

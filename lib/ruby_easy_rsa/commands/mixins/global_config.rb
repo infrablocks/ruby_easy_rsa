@@ -10,6 +10,8 @@ module RubyEasyRSA
           vars = opts[:vars]
           batch = opts[:batch]
           pki_directory = opts[:pki_directory]
+          input_password = opts[:input_password]
+          output_password = opts[:output_password]
 
           builder = super(builder, opts)
           builder = builder.with_environment_variable(
@@ -26,6 +28,10 @@ module RubyEasyRSA
               '--batch') if batch
           builder = builder.with_option(
               '--pki-dir', pki_directory) if pki_directory
+          builder = builder.with_option(
+              '--passin', input_password) if input_password
+          builder = builder.with_option(
+              '--passout', output_password) if output_password
           builder
         end
       end
