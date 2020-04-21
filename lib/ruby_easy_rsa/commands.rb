@@ -18,6 +18,7 @@ require_relative 'commands/export_p7'
 require_relative 'commands/export_p12'
 require_relative 'commands/set_rsa_pass'
 require_relative 'commands/set_ec_pass'
+require_relative 'commands/upgrade'
 
 module RubyEasyRSA
   module Commands
