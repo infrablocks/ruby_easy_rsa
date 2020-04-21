@@ -8,6 +8,7 @@ require_relative '../support/shared_examples/copy_extensions_config'
 require_relative '../support/shared_examples/extra_extensions_config'
 require_relative '../support/shared_examples/netscape_extensions_config'
 require_relative '../support/shared_examples/encrypt_key_config'
+require_relative '../support/shared_examples/inline_credentials_file_config'
 
 describe RubyEasyRSA::Commands::BuildClientFull do
   before(:each) do
@@ -75,6 +76,10 @@ describe RubyEasyRSA::Commands::BuildClientFull do
       ["some_important_thing"],
       filename_base: "some_important_thing")
   it_behaves_like("a command with encrypt key config",
+      "build-client-full",
+      ["some_important_thing"],
+      filename_base: "some_important_thing")
+  it_behaves_like("a command with inline credentials file config",
       "build-client-full",
       ["some_important_thing"],
       filename_base: "some_important_thing")

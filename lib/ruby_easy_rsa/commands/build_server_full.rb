@@ -9,6 +9,7 @@ require_relative 'mixins/copy_extensions_config'
 require_relative 'mixins/extra_extensions_config'
 require_relative 'mixins/netscape_extensions_config'
 require_relative 'mixins/encrypt_key_config'
+require_relative 'mixins/inline_credentials_file_config'
 
 module RubyEasyRSA
   module Commands
@@ -21,6 +22,7 @@ module RubyEasyRSA
       include Mixins::ExtraExtensionsConfig
       include Mixins::NetscapeExtensionsConfig
       include Mixins::EncryptKeyConfig
+      include Mixins::InlineCredentialsFileConfig
 
       def configure_command(builder, opts)
         filename_base = opts[:filename_base]
