@@ -36,8 +36,9 @@ describe RubyEasyRSA::Commands::Revoke do
 
   it_behaves_like("a command with global config",
       "revoke",
-      ["some_important_thing"],
-      filename_base: "some_important_thing")
+      ["some_important_thing", "affiliationChanged"],
+      filename_base: "some_important_thing",
+      reason: "affiliationChanged")
   it_behaves_like("a command with ssl config",
       "revoke",
       ["some_important_thing"],

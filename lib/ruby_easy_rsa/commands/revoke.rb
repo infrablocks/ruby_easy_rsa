@@ -12,10 +12,12 @@ module RubyEasyRSA
 
       def configure_command(builder, opts)
         filename_base = opts[:filename_base]
+        reason = opts[:reason]
 
+        builder = super(builder, opts)
         builder = builder.with_subcommand('revoke')
         builder = builder.with_argument(filename_base)
-        builder = super(builder, opts)
+        builder = builder.with_argument(reason) if reason
         builder
       end
     end
