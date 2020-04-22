@@ -47,8 +47,16 @@ module RubyEasyRSA
       Commands::BuildServerFull.new.execute(opts)
     end
 
+    def build_client_server_full(opts = {})
+      Commands::BuildClientServerFull.new.execute(opts)
+    end
+
     def revoke(opts = {})
       Commands::Revoke.new.execute(opts)
+    end
+
+    def renew(opts = {})
+      Commands::Renew.new.execute(opts)
     end
 
     def gen_crl(opts = {})
@@ -65,6 +73,10 @@ module RubyEasyRSA
 
     def show_cert(opts = {})
       Commands::ShowCert.new.execute(opts)
+    end
+
+    def show_ca(opts = {})
+      Commands::ShowCA.new.execute(opts)
     end
 
     def import_req(opts = {})
@@ -85,6 +97,10 @@ module RubyEasyRSA
 
     def set_ec_pass(opts = {})
       Commands::SetECPass.new.execute(opts)
+    end
+
+    def upgrade(opts = {})
+      Commands::Upgrade.new.execute(opts)
     end
   end
   extend ClassMethods
