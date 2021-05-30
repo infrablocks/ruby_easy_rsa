@@ -6,8 +6,8 @@ require 'ruby_easy_rsa/version'
 Gem::Specification.new do |spec|
   spec.name = 'ruby_easy_rsa'
   spec.version = RubyEasyRSA::VERSION
-  spec.authors = ['Toby Clemson']
-  spec.email = ['tobyclemson@gmail.com']
+  spec.authors = ['InfraBlocks Maintainers']
+  spec.email = ['maintainers@infrablocks.io']
 
   spec.summary = 'A simple Ruby wrapper for invoking EasyRSA commands.'
   spec.description = 'Wraps the EasyRSA scripts so that they can be ' +
