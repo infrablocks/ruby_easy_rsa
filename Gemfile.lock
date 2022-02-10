@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ruby_easy_rsa (0.10.0.pre.2)
+    ruby_easy_rsa (0.10.0.pre.3)
       lino (>= 1.5)
 
 GEM
@@ -117,4 +117,4 @@ DEPENDENCIES
   ruby_easy_rsa!
 
 BUNDLED WITH
-   2.3.6
+   2.3.7
