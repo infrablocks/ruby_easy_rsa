@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ruby_easy_rsa (0.10.0.pre.3)
+    ruby_easy_rsa (0.10.0.pre.4)
       lino (>= 1.5)
 
 GEM
