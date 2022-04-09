@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 module RubyEasyRSA
-  VERSION = '0.10.0.pre.7'
+  VERSION = '0.10.0.pre.8'
 end
