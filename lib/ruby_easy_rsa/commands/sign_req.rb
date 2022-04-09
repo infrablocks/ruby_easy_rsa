@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'lino'
 
 require_relative 'base'
@@ -27,8 +29,7 @@ module RubyEasyRSA
         builder = super(builder, opts)
         builder = builder.with_subcommand('sign-req')
         builder = builder.with_argument(type)
-        builder = builder.with_argument(filename_base)
-        builder
+        builder.with_argument(filename_base)
       end
     end
   end

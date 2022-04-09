@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'lino'
 
 require_relative 'base'
@@ -15,8 +17,7 @@ module RubyEasyRSA
 
         builder = super(builder, opts)
         builder = builder.with_subcommand('upgrade')
-        builder = builder.with_argument(type)
-        builder
+        builder.with_argument(type)
       end
     end
   end

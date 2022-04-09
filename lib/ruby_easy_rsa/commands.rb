@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'commands/init_pki'
 require_relative 'commands/build_ca'
 require_relative 'commands/gen_dh'
@@ -22,6 +24,5 @@ require_relative 'commands/upgrade'
 
 module RubyEasyRSA
   module Commands
-
   end
 end

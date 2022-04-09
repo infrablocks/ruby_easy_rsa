@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'lino'
 
 require_relative 'base'
@@ -19,8 +21,7 @@ module RubyEasyRSA
 
         builder = builder.with_subcommand('build-ca')
         builder = builder.with_argument('subca') if sub_ca
-        builder = super(builder, opts)
-        builder
+        super(builder, opts)
       end
     end
   end

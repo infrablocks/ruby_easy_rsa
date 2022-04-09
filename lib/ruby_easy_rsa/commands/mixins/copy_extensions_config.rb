@@ -1,13 +1,23 @@
+# frozen_string_literal: true
+
 module RubyEasyRSA
   module Commands
     module Mixins
       module CopyExtensionsConfig
+        # rubocop:disable Style/RedundantAssignment
         def configure_command(builder, opts)
-          copy_extensions = opts[:copy_extensions]
-
           builder = super(builder, opts)
-          builder = builder.with_flag('--copy-ext') if copy_extensions
+          builder = with_copy_extensions(builder, opts[:copy_extensions])
           builder
+        end
+        # rubocop:enable Style/RedundantAssignment
+
+        private
+
+        def with_copy_extensions(builder, copy_extensions)
+          return builder unless copy_extensions
+
+          builder.with_flag('--copy-ext')
         end
       end
     end

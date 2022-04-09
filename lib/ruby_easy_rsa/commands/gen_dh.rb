@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'lino'
 
 require_relative 'base'
@@ -12,8 +14,7 @@ module RubyEasyRSA
 
       def configure_command(builder, opts)
         builder = super(builder, opts)
-        builder = builder.with_subcommand('gen-dh')
-        builder
+        builder.with_subcommand('gen-dh')
       end
     end
   end

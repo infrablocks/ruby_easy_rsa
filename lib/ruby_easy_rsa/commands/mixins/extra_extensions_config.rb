@@ -1,18 +1,36 @@
+# frozen_string_literal: true
+
 module RubyEasyRSA
   module Commands
     module Mixins
       module ExtraExtensionsConfig
+        # rubocop:disable Style/RedundantAssignment
         def configure_command(builder, opts)
-          extra_extensions = opts[:extra_extensions]
-          subject_alternative_name = opts[:subject_alternative_name]
-
           builder = super(builder, opts)
-          builder = builder.with_environment_variable(
-              'EASYRSA_EXTRA_EXT', extra_extensions) if extra_extensions
-          builder = builder.with_option(
-              '--subject-alt-name', subject_alternative_name, quoting: '"'
-          ) if subject_alternative_name
+          builder = with_extra_extensions(builder, opts[:extra_extensions])
+          builder = with_subject_alternative_name(
+            builder, opts[:subject_alternative_name]
+          )
           builder
+        end
+        # rubocop:enable Style/RedundantAssignment
+
+        private
+
+        def with_extra_extensions(builder, extra_extensions)
+          return builder unless extra_extensions
+
+          builder.with_environment_variable(
+            'EASYRSA_EXTRA_EXT', extra_extensions
+          )
+        end
+
+        def with_subject_alternative_name(builder, subject_alternative_name)
+          return builder unless subject_alternative_name
+
+          builder.with_option(
+            '--subject-alt-name', subject_alternative_name, quoting: '"'
+          )
         end
       end
     end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'ruby_easy_rsa/version'
 require 'ruby_easy_rsa/commands'
 
@@ -91,13 +93,17 @@ module RubyEasyRSA
       Commands::ExportP12.new.execute(opts)
     end
 
+    # rubocop:disable Naming/AccessorMethodName
     def set_rsa_pass(opts = {})
       Commands::SetRSAPass.new.execute(opts)
     end
+    # rubocop:enable Naming/AccessorMethodName
 
+    # rubocop:disable Naming/AccessorMethodName
     def set_ec_pass(opts = {})
       Commands::SetECPass.new.execute(opts)
     end
+    # rubocop:enable Naming/AccessorMethodName
 
     def upgrade(opts = {})
       Commands::Upgrade.new.execute(opts)
