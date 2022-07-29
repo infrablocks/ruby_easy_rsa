@@ -113,7 +113,7 @@ describe RubyEasyRSA::Commands::BuildClientFull do
 
     expect(Open4)
       .to(have_received(:spawn)
-            .with('path/to/binary --subca-len=10 '\
+            .with('path/to/binary --subca-len=10 ' \
                   'build-client-full some_important_thing',
                   any_args))
   end
