@@ -13,7 +13,7 @@ describe RubyEasyRSA::Commands::BuildClientServerFull do
     RubyEasyRSA.reset!
   end
 
-  it 'calls the easyrsa build-clientServer-full command with the '\
+  it 'calls the easyrsa build-clientServer-full command with the ' \
      'filename base' do
     filename_base = 'some_important_thing'
     command = described_class.new(binary: 'easyrsa')
