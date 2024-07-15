@@ -4,29 +4,45 @@ module RubyEasyRSA
   module Commands
     module Mixins
       module GlobalConfig
+        private
+
         # rubocop:disable Style/RedundantAssignment
         # rubocop:disable Metrics/MethodLength
         # rubocop:disable Metrics/AbcSize
-        def configure_command(builder, opts)
-          builder = super(builder, opts)
-          builder = with_openssl_binary(builder, opts[:openssl_binary])
-          builder = with_extensions_directory(
-            builder, opts[:extensions_directory]
+        def configure_command(initial_builder, parameters)
+          builder = super
+          builder = with_openssl_binary(
+            builder, parameters[:openssl_binary]
           )
-          builder = with_ssl_configuration(builder, opts[:ssl_configuration])
-          builder = with_safe_configuration(builder, opts[:safe_configuration])
-          builder = with_vars(builder, opts[:vars])
-          builder = with_batch(builder, opts[:batch])
-          builder = with_pki_directory(builder, opts[:pki_directory])
-          builder = with_input_password(builder, opts[:input_password])
-          builder = with_output_password(builder, opts[:output_password])
+          builder = with_extensions_directory(
+            builder, parameters[:extensions_directory]
+          )
+          builder = with_ssl_configuration(
+            builder, parameters[:ssl_configuration]
+          )
+          builder = with_safe_configuration(
+            builder, parameters[:safe_configuration]
+          )
+          builder = with_vars(
+            builder, parameters[:vars]
+          )
+          builder = with_batch(
+            builder, parameters[:batch]
+          )
+          builder = with_pki_directory(
+            builder, parameters[:pki_directory]
+          )
+          builder = with_input_password(
+            builder, parameters[:input_password]
+          )
+          builder = with_output_password(
+            builder, parameters[:output_password]
+          )
           builder
         end
         # rubocop:enable Metrics/AbcSize
         # rubocop:enable Metrics/MethodLength
         # rubocop:enable Style/RedundantAssignment
-
-        private
 
         def with_openssl_binary(builder, openssl_binary)
           return builder unless openssl_binary

@@ -15,7 +15,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(expires_in_days: expires_in_days)
+      options.merge(expires_in_days:)
     )
 
     expect(Open4)
@@ -32,7 +32,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(digest: digest)
+      options.merge(digest:)
     )
 
     expect(Open4)
@@ -50,7 +50,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(distinguished_name_mode: distinguished_name_mode)
+      options.merge(distinguished_name_mode:)
     )
 
     expect(Open4)
@@ -68,7 +68,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(common_name: common_name)
+      options.merge(common_name:)
     )
 
     expect(Open4)
@@ -86,7 +86,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(country: country)
+      options.merge(country:)
     )
 
     expect(Open4)
@@ -104,7 +104,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(province: province)
+      options.merge(province:)
     )
 
     expect(Open4)
@@ -122,7 +122,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(city: city)
+      options.merge(city:)
     )
 
     expect(Open4)
@@ -140,7 +140,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(organisation: organisation)
+      options.merge(organisation:)
     )
 
     expect(Open4)
@@ -158,7 +158,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(organisational_unit: organisational_unit)
+      options.merge(organisational_unit:)
     )
 
     expect(Open4)
@@ -176,7 +176,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(email: email)
+      options.merge(email:)
     )
 
     expect(Open4)

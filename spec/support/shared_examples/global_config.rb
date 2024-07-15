@@ -15,7 +15,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(pki_directory: pki_directory)
+      options.merge(pki_directory:)
     )
 
     expect(Open4)
@@ -33,7 +33,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(extensions_directory: extensions_directory)
+      options.merge(extensions_directory:)
     )
 
     expect(Open4)
@@ -51,7 +51,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(openssl_binary: openssl_binary)
+      options.merge(openssl_binary:)
     )
 
     expect(Open4)
@@ -69,7 +69,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(ssl_configuration: ssl_configuration)
+      options.merge(ssl_configuration:)
     )
 
     expect(Open4)
@@ -87,7 +87,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(safe_configuration: safe_configuration)
+      options.merge(safe_configuration:)
     )
 
     expect(Open4)
@@ -105,7 +105,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(vars: vars)
+      options.merge(vars:)
     )
 
     expect(Open4)
@@ -123,7 +123,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(batch: batch)
+      options.merge(batch:)
     )
 
     expect(Open4)
@@ -141,7 +141,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(batch: batch)
+      options.merge(batch:)
     )
 
     expect(Open4)
@@ -159,7 +159,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(input_password: input_password)
+      options.merge(input_password:)
     )
 
     expect(Open4)
@@ -177,7 +177,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(output_password: output_password)
+      options.merge(output_password:)
     )
 
     expect(Open4)

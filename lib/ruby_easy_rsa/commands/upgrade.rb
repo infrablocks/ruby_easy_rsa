@@ -12,12 +12,12 @@ module RubyEasyRSA
       include Mixins::GlobalConfig
       include Mixins::SSLConfig
 
-      def configure_command(builder, opts)
-        type = opts[:type]
+      private
 
-        builder = super(builder, opts)
+      def configure_command(initial_builder, parameters)
+        builder = super
         builder = builder.with_subcommand('upgrade')
-        builder.with_argument(type)
+        builder.with_argument(parameters[:type])
       end
     end
   end

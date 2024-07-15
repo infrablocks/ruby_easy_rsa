@@ -15,7 +15,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(algorithm: algorithm)
+      options.merge(algorithm:)
     )
 
     expect(Open4)
@@ -33,7 +33,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(curve: curve)
+      options.merge(curve:)
     )
 
     expect(Open4)
@@ -51,7 +51,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(ec_directory: ec_directory)
+      options.merge(ec_directory:)
     )
 
     expect(Open4)

@@ -59,8 +59,8 @@ describe RubyEasyRSA::Commands::ShowReq do
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      full: full,
-      filename_base: filename_base
+      full:,
+      filename_base:
     )
 
     expect(Open4)
@@ -78,8 +78,8 @@ describe RubyEasyRSA::Commands::ShowReq do
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      full: full,
-      filename_base: filename_base
+      full:,
+      filename_base:
     )
 
     expect(Open4)

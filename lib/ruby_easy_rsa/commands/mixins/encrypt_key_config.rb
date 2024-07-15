@@ -4,15 +4,15 @@ module RubyEasyRSA
   module Commands
     module Mixins
       module EncryptKeyConfig
+        private
+
         # rubocop:disable Style/RedundantAssignment
-        def configure_command(builder, opts)
-          builder = super(builder, opts)
-          builder = with_encrypt_key(builder, encrypt_key(opts))
+        def configure_command(initial_builder, parameters)
+          builder = super
+          builder = with_encrypt_key(builder, encrypt_key(parameters))
           builder
         end
         # rubocop:enable Style/RedundantAssignment
-
-        private
 
         def encrypt_key(opts)
           opts[:encrypt_key].nil? ? true : opts[:encrypt_key]

@@ -15,7 +15,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(extra_extensions: extra_extensions)
+      options.merge(extra_extensions:)
     )
 
     expect(Open4)
@@ -34,7 +34,7 @@ shared_examples(
 
     command.execute(
       options.merge(
-        subject_alternative_name: subject_alternative_name
+        subject_alternative_name:
       )
     )
 

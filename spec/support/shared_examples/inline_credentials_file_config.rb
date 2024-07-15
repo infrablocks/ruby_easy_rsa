@@ -15,7 +15,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(inline_credentials_file: inline_credentials_file)
+      options.merge(inline_credentials_file:)
     )
 
     expect(Open4)
@@ -33,7 +33,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(inline_credentials_file: inline_credentials_file)
+      options.merge(inline_credentials_file:)
     )
 
     expect(Open4)

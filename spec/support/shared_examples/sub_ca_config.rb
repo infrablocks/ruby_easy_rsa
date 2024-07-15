@@ -15,7 +15,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(sub_ca_length: sub_ca_length)
+      options.merge(sub_ca_length:)
     )
 
     expect(Open4)

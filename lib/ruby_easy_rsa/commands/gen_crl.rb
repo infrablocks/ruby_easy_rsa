@@ -12,9 +12,11 @@ module RubyEasyRSA
       include Mixins::GlobalConfig
       include Mixins::SSLConfig
 
-      def configure_command(builder, opts)
-        builder = builder.with_subcommand('gen-crl')
-        super(builder, opts)
+      private
+
+      def configure_command(initial_builder, parameters)
+        builder = initial_builder.with_subcommand('gen-crl')
+        super(builder, parameters)
       end
     end
   end

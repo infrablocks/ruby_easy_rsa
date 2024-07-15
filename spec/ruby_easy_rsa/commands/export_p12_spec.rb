@@ -20,7 +20,7 @@ describe RubyEasyRSA::Commands::ExportP12 do
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      filename_base: filename_base
+      filename_base:
     )
 
     expect(Open4)
@@ -36,7 +36,7 @@ describe RubyEasyRSA::Commands::ExportP12 do
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      filename_base: filename_base
+      filename_base:
     )
 
     expect(Open4)
@@ -65,7 +65,7 @@ describe RubyEasyRSA::Commands::ExportP12 do
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      filename_base: filename_base,
+      filename_base:,
       include_ca: true
     )
 
@@ -82,7 +82,7 @@ describe RubyEasyRSA::Commands::ExportP12 do
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      filename_base: filename_base,
+      filename_base:,
       include_ca: false
     )
 
@@ -99,7 +99,7 @@ describe RubyEasyRSA::Commands::ExportP12 do
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      filename_base: filename_base,
+      filename_base:,
       include_key: true
     )
 
@@ -116,7 +116,7 @@ describe RubyEasyRSA::Commands::ExportP12 do
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      filename_base: filename_base,
+      filename_base:,
       include_key: false
     )
 

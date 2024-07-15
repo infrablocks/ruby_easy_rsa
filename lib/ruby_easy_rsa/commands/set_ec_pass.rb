@@ -14,14 +14,13 @@ module RubyEasyRSA
       include Mixins::SSLConfig
       include Mixins::EncryptKeyConfig
 
-      def configure_command(builder, opts)
-        filename_base = opts[:filename_base]
-        file = opts[:file]
+      private
 
-        builder = builder.with_subcommand('set-ec-pass')
-        builder = builder.with_argument(filename_base)
-        builder = super(builder, opts)
-        builder = builder.with_argument('file') if file
+      def configure_command(initial_builder, parameters)
+        builder = initial_builder.with_subcommand('set-ec-pass')
+        builder = builder.with_argument(parameters[:filename_base])
+        builder = super(builder, parameters)
+        builder = builder.with_argument('file') if parameters[:file]
         builder
       end
     end

@@ -12,14 +12,13 @@ module RubyEasyRSA
       include Mixins::GlobalConfig
       include Mixins::SSLConfig
 
-      def configure_command(builder, opts)
-        filename_base = opts[:filename_base]
-        full = opts[:full]
+      private
 
-        builder = super(builder, opts)
+      def configure_command(initial_builder, parameters)
+        builder = super
         builder = builder.with_subcommand('show-ca')
-        builder = builder.with_argument(filename_base)
-        builder = builder.with_argument('full') if full
+        builder = builder.with_argument(parameters[:filename_base])
+        builder = builder.with_argument('full') if parameters[:full]
         builder
       end
     end

@@ -15,7 +15,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(encrypt_key: encrypt_key)
+      options.merge(encrypt_key:)
     )
 
     expect(Open4)
@@ -32,7 +32,7 @@ shared_examples(
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      options.merge(encrypt_key: encrypt_key)
+      options.merge(encrypt_key:)
     )
 
     expect(Open4)

@@ -12,11 +12,13 @@ module RubyEasyRSA
       include Mixins::GlobalConfig
       include Mixins::SSLConfig
 
-      def configure_command(builder, opts)
-        request_file = opts[:request_file]
-        filename_base = opts[:filename_base]
+      private
 
-        builder = super(builder, opts)
+      def configure_command(initial_builder, parameters)
+        request_file = parameters[:request_file]
+        filename_base = parameters[:filename_base]
+
+        builder = super
         builder = builder.with_subcommand('import-req')
         builder = builder.with_argument(request_file)
         builder.with_argument(filename_base)

@@ -22,8 +22,8 @@ describe RubyEasyRSA::Commands::ImportReq do
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      request_file: request_file,
-      filename_base: filename_base
+      request_file:,
+      filename_base:
     )
 
     expect(Open4)
@@ -41,8 +41,8 @@ describe RubyEasyRSA::Commands::ImportReq do
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      request_file: request_file,
-      filename_base: filename_base
+      request_file:,
+      filename_base:
     )
 
     expect(Open4)

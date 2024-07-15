@@ -21,8 +21,8 @@ describe RubyEasyRSA::Commands::SignReq do
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      filename_base: filename_base,
-      type: type
+      filename_base:,
+      type:
     )
 
     expect(Open4)
@@ -39,8 +39,8 @@ describe RubyEasyRSA::Commands::SignReq do
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      filename_base: filename_base,
-      type: type
+      filename_base:,
+      type:
     )
 
     expect(Open4)

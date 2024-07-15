@@ -4,20 +4,20 @@ module RubyEasyRSA
   module Commands
     module Mixins
       module NetscapeExtensionsConfig
+        private
+
         # rubocop:disable Style/RedundantAssignment
-        def configure_command(builder, opts)
-          builder = super(builder, opts)
+        def configure_command(initial_builder, parameters)
+          builder = super
           builder = with_netscape_extensions_support(
-            builder, opts[:netscape_extensions_support]
+            builder, parameters[:netscape_extensions_support]
           )
           builder = with_netscape_extensions_comment(
-            builder, opts[:netscape_extensions_comment]
+            builder, parameters[:netscape_extensions_comment]
           )
           builder
         end
         # rubocop:enable Style/RedundantAssignment
-
-        private
 
         def with_netscape_extensions_support(
           builder, netscape_extensions_support

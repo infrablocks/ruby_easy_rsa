@@ -22,14 +22,13 @@ module RubyEasyRSA
       include Mixins::ExtraExtensionsConfig
       include Mixins::NetscapeExtensionsConfig
 
-      def configure_command(builder, opts)
-        type = opts[:type]
-        filename_base = opts[:filename_base]
+      private
 
-        builder = super(builder, opts)
+      def configure_command(initial_builder, parameters)
+        builder = super
         builder = builder.with_subcommand('sign-req')
-        builder = builder.with_argument(type)
-        builder.with_argument(filename_base)
+        builder = builder.with_argument(parameters[:type])
+        builder.with_argument(parameters[:filename_base])
       end
     end
   end

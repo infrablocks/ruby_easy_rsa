@@ -12,8 +12,10 @@ module RubyEasyRSA
       include Mixins::GlobalConfig
       include Mixins::SSLConfig
 
-      def configure_command(builder, opts)
-        builder = super(builder, opts)
+      private
+
+      def configure_command(initial_builder, parameters)
+        builder = super
         builder.with_subcommand('init-pki')
       end
     end

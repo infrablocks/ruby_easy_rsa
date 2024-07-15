@@ -14,12 +14,12 @@ module RubyEasyRSA
       include Mixins::SSLConfig
       include Mixins::EncryptKeyConfig
 
-      def configure_command(builder, opts)
-        filename_base = opts[:filename_base]
+      private
 
-        builder = builder.with_subcommand('renew')
-        builder = builder.with_argument(filename_base)
-        super(builder, opts)
+      def configure_command(initial_builder, parameters)
+        builder = initial_builder.with_subcommand('renew')
+        builder = builder.with_argument(parameters[:filename_base])
+        super(builder, parameters)
       end
     end
   end

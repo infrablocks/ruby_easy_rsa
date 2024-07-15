@@ -16,12 +16,12 @@ module RubyEasyRSA
       include Mixins::AlgorithmConfig
       include Mixins::EncryptKeyConfig
 
-      def configure_command(builder, opts)
-        sub_ca = opts[:sub_ca]
+      private
 
-        builder = builder.with_subcommand('build-ca')
-        builder = builder.with_argument('subca') if sub_ca
-        super(builder, opts)
+      def configure_command(initial_builder, parameters)
+        builder = initial_builder.with_subcommand('build-ca')
+        builder = builder.with_argument('subca') if parameters[:sub_ca]
+        super(builder, parameters)
       end
     end
   end

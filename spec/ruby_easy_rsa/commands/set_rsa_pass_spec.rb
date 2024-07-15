@@ -20,7 +20,7 @@ describe RubyEasyRSA::Commands::SetRSAPass do
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      filename_base: filename_base
+      filename_base:
     )
 
     expect(Open4)
@@ -36,7 +36,7 @@ describe RubyEasyRSA::Commands::SetRSAPass do
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      filename_base: filename_base
+      filename_base:
     )
 
     expect(Open4)
@@ -71,7 +71,7 @@ describe RubyEasyRSA::Commands::SetRSAPass do
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      filename_base: filename_base,
+      filename_base:,
       file: true
     )
 
@@ -88,7 +88,7 @@ describe RubyEasyRSA::Commands::SetRSAPass do
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      filename_base: filename_base,
+      filename_base:,
       file: false
     )
 

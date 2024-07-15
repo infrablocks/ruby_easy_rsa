@@ -12,16 +12,23 @@ module RubyEasyRSA
       include Mixins::GlobalConfig
       include Mixins::SSLConfig
 
-      def configure_command(builder, opts)
-        filename_base = opts[:filename_base]
-        include_ca = opts[:include_ca].nil? ? true : opts[:include_ca]
-        include_key = opts[:include_key].nil? ? true : opts[:include_key]
+      private
 
-        builder = super(builder, opts)
+      def parameter_defaults(parameters)
+        include_ca = parameters[:include_ca]
+        include_key = parameters[:include_key]
+        super.merge(
+          include_ca: include_ca.nil? ? true : include_ca,
+          include_key: include_key.nil? ? true : include_key
+        )
+      end
+
+      def configure_command(initial_builder, parameters)
+        builder = super
         builder = builder.with_subcommand('export-p12')
-        builder = builder.with_argument(filename_base)
-        builder = builder.with_argument('noca') unless include_ca
-        builder = builder.with_argument('nokey') unless include_key
+        builder = builder.with_argument(parameters[:filename_base])
+        builder = builder.with_argument('noca') unless parameters[:include_ca]
+        builder = builder.with_argument('nokey') unless parameters[:include_key]
         builder
       end
     end

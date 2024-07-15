@@ -12,14 +12,16 @@ module RubyEasyRSA
       include Mixins::GlobalConfig
       include Mixins::SSLConfig
 
-      def configure_command(builder, opts)
-        filename_base = opts[:filename_base]
-        reason = opts[:reason]
+      private
 
-        builder = super(builder, opts)
+      def configure_command(initial_builder, parameters)
+        builder = super
         builder = builder.with_subcommand('revoke')
-        builder = builder.with_argument(filename_base)
-        builder = builder.with_argument(reason) if reason
+        builder = builder.with_argument(parameters[:filename_base])
+        if parameters[:reason]
+          builder =
+            builder.with_argument(parameters[:reason])
+        end
         builder
       end
     end

@@ -16,7 +16,7 @@ shared_examples(
 
     command.execute(
       options.merge(
-        netscape_extensions_support: netscape_extensions_support
+        netscape_extensions_support:
       )
     )
 
@@ -35,7 +35,7 @@ shared_examples(
 
     command.execute(
       options.merge(
-        netscape_extensions_support: netscape_extensions_support
+        netscape_extensions_support:
       )
     )
 
@@ -54,7 +54,7 @@ shared_examples(
 
     command.execute(
       options.merge(
-        netscape_extensions_comment: netscape_extensions_comment
+        netscape_extensions_comment:
       )
     )
 

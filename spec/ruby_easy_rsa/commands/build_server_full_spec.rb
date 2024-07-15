@@ -20,7 +20,7 @@ describe RubyEasyRSA::Commands::BuildServerFull do
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      filename_base: filename_base
+      filename_base:
     )
 
     expect(Open4)
@@ -36,7 +36,7 @@ describe RubyEasyRSA::Commands::BuildServerFull do
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      filename_base: filename_base
+      filename_base:
     )
 
     expect(Open4)
@@ -108,8 +108,8 @@ describe RubyEasyRSA::Commands::BuildServerFull do
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      filename_base: filename_base,
-      sub_ca_length: sub_ca_length
+      filename_base:,
+      sub_ca_length:
     )
 
     expect(Open4)

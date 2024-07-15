@@ -50,7 +50,7 @@ describe RubyEasyRSA::Commands::BuildCA do
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      sub_ca: sub_ca
+      sub_ca:
     )
 
     expect(Open4)
@@ -66,7 +66,7 @@ describe RubyEasyRSA::Commands::BuildCA do
     allow(Open4).to(receive(:spawn))
 
     command.execute(
-      sub_ca: sub_ca
+      sub_ca:
     )
 
     expect(Open4)

@@ -4,18 +4,20 @@ module RubyEasyRSA
   module Commands
     module Mixins
       module ExtraExtensionsConfig
+        private
+
         # rubocop:disable Style/RedundantAssignment
-        def configure_command(builder, opts)
-          builder = super(builder, opts)
-          builder = with_extra_extensions(builder, opts[:extra_extensions])
+        def configure_command(initial_builder, parameters)
+          builder = super
+          builder = with_extra_extensions(
+            builder, parameters[:extra_extensions]
+          )
           builder = with_subject_alternative_name(
-            builder, opts[:subject_alternative_name]
+            builder, parameters[:subject_alternative_name]
           )
           builder
         end
         # rubocop:enable Style/RedundantAssignment
-
-        private
 
         def with_extra_extensions(builder, extra_extensions)
           return builder unless extra_extensions
