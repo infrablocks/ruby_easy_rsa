@@ -3,8 +3,17 @@
 shared_examples(
   'a command with encrypt key config'
 ) do |command_name, arguments = [], options = {}|
-  let(:argument_string) do
-    arguments.empty? ? '' : " #{arguments.join(' ')}"
+  let(:argument_string) { arguments.empty? ? '' : " #{arguments.join(' ')}" }
+  let(:executor) { Lino::Executors::Mock.new }
+
+  before do
+    Lino.configure do |config|
+      config.executor = executor
+    end
+  end
+
+  after do
+    Lino.reset!
   end
 
   it 'passes the nopass argument when encrypt_key is false' do
@@ -12,16 +21,12 @@ shared_examples(
 
     command = described_class.new
 
-    allow(Open4).to(receive(:spawn))
-
     command.execute(
       options.merge(encrypt_key:)
     )
 
-    expect(Open4)
-      .to(have_received(:spawn)
-            .with("path/to/binary #{command_name}#{argument_string} nopass",
-                  any_args))
+    expect(executor.executions.first.command_line.string)
+      .to(eq("path/to/binary #{command_name}#{argument_string} nopass"))
   end
 
   it 'does not pass the nopass argument when encrypt_key is true' do
@@ -29,15 +34,11 @@ shared_examples(
 
     command = described_class.new
 
-    allow(Open4).to(receive(:spawn))
-
     command.execute(
       options.merge(encrypt_key:)
     )
 
-    expect(Open4)
-      .to(have_received(:spawn)
-            .with("path/to/binary #{command_name}#{argument_string}",
-                  any_args))
+    expect(executor.executions.first.command_line.string)
+      .to(eq("path/to/binary #{command_name}#{argument_string}"))
   end
 end

@@ -3,13 +3,19 @@
 require 'spec_helper'
 
 describe RubyEasyRSA::Commands::BuildServerFull do
+  let(:executor) { Lino::Executors::Mock.new }
+
   before do
     RubyEasyRSA.configure do |config|
       config.binary = 'path/to/binary'
     end
+    Lino.configure do |config|
+      config.executor = executor
+    end
   end
 
   after do
+    Lino.reset!
     RubyEasyRSA.reset!
   end
 
@@ -17,32 +23,24 @@ describe RubyEasyRSA::Commands::BuildServerFull do
     filename_base = 'some_important_thing'
     command = described_class.new(binary: 'easyrsa')
 
-    allow(Open4).to(receive(:spawn))
-
     command.execute(
       filename_base:
     )
 
-    expect(Open4)
-      .to(have_received(:spawn)
-            .with('easyrsa build-server-full some_important_thing',
-                  any_args))
+    expect(executor.executions.first.command_line.string)
+      .to(eq('easyrsa build-server-full some_important_thing'))
   end
 
   it 'defaults to the configured binary when none provided' do
     filename_base = 'some_important_thing'
     command = described_class.new
 
-    allow(Open4).to(receive(:spawn))
-
     command.execute(
       filename_base:
     )
 
-    expect(Open4)
-      .to(have_received(:spawn)
-            .with('path/to/binary build-server-full some_important_thing',
-                  any_args))
+    expect(executor.executions.first.command_line.string)
+      .to(eq('path/to/binary build-server-full some_important_thing'))
   end
 
   it_behaves_like(
@@ -105,17 +103,13 @@ describe RubyEasyRSA::Commands::BuildServerFull do
     sub_ca_length = 10
     command = described_class.new
 
-    allow(Open4).to(receive(:spawn))
-
     command.execute(
       filename_base:,
       sub_ca_length:
     )
 
-    expect(Open4)
-      .to(have_received(:spawn)
-            .with('path/to/binary --subca-len=10 ' \
-                  'build-server-full some_important_thing',
-                  any_args))
+    expect(executor.executions.first.command_line.string)
+      .to(eq('path/to/binary --subca-len=10 ' \
+             'build-server-full some_important_thing'))
   end
 end

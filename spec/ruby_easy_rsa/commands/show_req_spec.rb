@@ -3,38 +3,38 @@
 require 'spec_helper'
 
 describe RubyEasyRSA::Commands::ShowReq do
+  let(:executor) { Lino::Executors::Mock.new }
+
   before do
     RubyEasyRSA.configure do |config|
       config.binary = 'path/to/binary'
     end
+    Lino.configure do |config|
+      config.executor = executor
+    end
   end
 
   after do
+    Lino.reset!
     RubyEasyRSA.reset!
   end
 
   it 'calls the easyrsa show-req command' do
     command = described_class.new(binary: 'easyrsa')
 
-    allow(Open4).to(receive(:spawn))
-
     command.execute
 
-    expect(Open4)
-      .to(have_received(:spawn)
-            .with('easyrsa show-req', any_args))
+    expect(executor.executions.first.command_line.string)
+      .to(eq('easyrsa show-req'))
   end
 
   it 'defaults to the configured binary when none provided' do
     command = described_class.new
 
-    allow(Open4).to(receive(:spawn))
-
     command.execute
 
-    expect(Open4)
-      .to(have_received(:spawn)
-            .with('path/to/binary show-req', any_args))
+    expect(executor.executions.first.command_line.string)
+      .to(eq('path/to/binary show-req'))
   end
 
   it_behaves_like(
@@ -56,17 +56,13 @@ describe RubyEasyRSA::Commands::ShowReq do
 
     command = described_class.new
 
-    allow(Open4).to(receive(:spawn))
-
     command.execute(
       full:,
       filename_base:
     )
 
-    expect(Open4)
-      .to(have_received(:spawn)
-            .with('path/to/binary show-req some_important_thing full',
-                  any_args))
+    expect(executor.executions.first.command_line.string)
+      .to(eq('path/to/binary show-req some_important_thing full'))
   end
 
   it 'does not pass the full argument when full is false' do
@@ -75,16 +71,12 @@ describe RubyEasyRSA::Commands::ShowReq do
 
     command = described_class.new
 
-    allow(Open4).to(receive(:spawn))
-
     command.execute(
       full:,
       filename_base:
     )
 
-    expect(Open4)
-      .to(have_received(:spawn)
-            .with('path/to/binary show-req some_important_thing',
-                  any_args))
+    expect(executor.executions.first.command_line.string)
+      .to(eq('path/to/binary show-req some_important_thing'))
   end
 end

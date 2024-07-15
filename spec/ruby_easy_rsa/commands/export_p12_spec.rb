@@ -3,13 +3,19 @@
 require 'spec_helper'
 
 describe RubyEasyRSA::Commands::ExportP12 do
+  let(:executor) { Lino::Executors::Mock.new }
+
   before do
     RubyEasyRSA.configure do |config|
       config.binary = 'path/to/binary'
     end
+    Lino.configure do |config|
+      config.executor = executor
+    end
   end
 
   after do
+    Lino.reset!
     RubyEasyRSA.reset!
   end
 
@@ -17,32 +23,24 @@ describe RubyEasyRSA::Commands::ExportP12 do
     filename_base = 'some_important_thing'
     command = described_class.new(binary: 'easyrsa')
 
-    allow(Open4).to(receive(:spawn))
-
     command.execute(
       filename_base:
     )
 
-    expect(Open4)
-      .to(have_received(:spawn)
-            .with('easyrsa export-p12 some_important_thing',
-                  any_args))
+    expect(executor.executions.first.command_line.string)
+      .to(eq('easyrsa export-p12 some_important_thing'))
   end
 
   it 'defaults to the configured binary when none provided' do
     filename_base = 'some_important_thing'
     command = described_class.new
 
-    allow(Open4).to(receive(:spawn))
-
     command.execute(
       filename_base:
     )
 
-    expect(Open4)
-      .to(have_received(:spawn)
-            .with('path/to/binary export-p12 some_important_thing',
-                  any_args))
+    expect(executor.executions.first.command_line.string)
+      .to(eq('path/to/binary export-p12 some_important_thing'))
   end
 
   it_behaves_like(
@@ -62,67 +60,51 @@ describe RubyEasyRSA::Commands::ExportP12 do
     filename_base = 'some_important_thing'
     command = described_class.new
 
-    allow(Open4).to(receive(:spawn))
-
     command.execute(
       filename_base:,
       include_ca: true
     )
 
-    expect(Open4)
-      .to(have_received(:spawn)
-            .with('path/to/binary export-p12 some_important_thing',
-                  any_args))
+    expect(executor.executions.first.command_line.string)
+      .to(eq('path/to/binary export-p12 some_important_thing'))
   end
 
   it 'includes the noca argument when include_ca is false' do
     filename_base = 'some_important_thing'
     command = described_class.new
 
-    allow(Open4).to(receive(:spawn))
-
     command.execute(
       filename_base:,
       include_ca: false
     )
 
-    expect(Open4)
-      .to(have_received(:spawn)
-            .with('path/to/binary export-p12 some_important_thing noca',
-                  any_args))
+    expect(executor.executions.first.command_line.string)
+      .to(eq('path/to/binary export-p12 some_important_thing noca'))
   end
 
   it 'does not include the nokey argument when include_key is true' do
     filename_base = 'some_important_thing'
     command = described_class.new
 
-    allow(Open4).to(receive(:spawn))
-
     command.execute(
       filename_base:,
       include_key: true
     )
 
-    expect(Open4)
-      .to(have_received(:spawn)
-            .with('path/to/binary export-p12 some_important_thing',
-                  any_args))
+    expect(executor.executions.first.command_line.string)
+      .to(eq('path/to/binary export-p12 some_important_thing'))
   end
 
   it 'includes the nokey argument when include_key is false' do
     filename_base = 'some_important_thing'
     command = described_class.new
 
-    allow(Open4).to(receive(:spawn))
-
     command.execute(
       filename_base:,
       include_key: false
     )
 
-    expect(Open4)
-      .to(have_received(:spawn)
-            .with('path/to/binary export-p12 some_important_thing nokey',
-                  any_args))
+    expect(executor.executions.first.command_line.string)
+      .to(eq('path/to/binary export-p12 some_important_thing nokey'))
   end
 end
